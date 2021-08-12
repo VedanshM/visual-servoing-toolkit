@@ -23,17 +23,17 @@ def get_interaction_point(s,KK,Z):
     else:
         Zarr=Z
 
-    Lsd=np.zeros((s.shape[0],6),dtype=np.float32)
+    Lsd=np.zeros((s.shape[0],3),dtype=np.float32)
 
     for m in range (0,Lsd.shape[0],2):
         x = (s[m] - u0)/px 
         y = (s[m+1] - v0)/py 
     
         Zinv =  1/Zarr[m]
-        Lsd[m,:] =  np.array([-Zinv, 0, x*Zinv, x*y, -(1+x**2), y])
+        Lsd[m,:] =  np.array([-Zinv, 0, x*Zinv])
 
         Zinv =  1/Zarr[m+1]
-        Lsd[m+1,:] =  np.array([0, -Zinv, y*Zinv, 1+y**2, -x*y, -x])
+        Lsd[m+1,:] =  np.array([0, -Zinv, y*Zinv])
     
     
     return Lsd

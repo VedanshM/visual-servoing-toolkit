@@ -119,7 +119,7 @@ if __name__== "__main__":
         #control loop
         error=kp_curr-kp_des
         vc=-mu*np.matmul(np.linalg.pinv(Lsd),error)
-        print('iteration=%d,error=%.2f, vc=%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n'%(cnt,np.linalg.norm(error),vc[0],vc[1],vc[2],vc[3],vc[4],vc[5]))
+        print('iteration=%d,error=%.2f, vc='%(cnt,np.linalg.norm(error)) + str(vc))
         #For testing the camera velocity along an axis. 
         #vc= np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.1])
         if(cnt > 200 or np.linalg.norm(error) <3):
@@ -137,9 +137,9 @@ if __name__== "__main__":
         cmd.linear.y = -vc[0]
         cmd.linear.z = -vc[1]
 
-        cmd.angular.x = vc[5]
-        cmd.angular.y = -vc[3]
-        cmd.angular.z = -vc[4]
+        cmd.angular.x = 0
+        cmd.angular.y = 0
+        cmd.angular.z = 0
         handle.set_object_vel(rob_name,cmd)
 
         cnt = cnt +1
